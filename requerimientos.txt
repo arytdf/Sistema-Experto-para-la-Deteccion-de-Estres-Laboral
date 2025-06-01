@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+pydantic
+pytest            # (si vas a escribir tests)
