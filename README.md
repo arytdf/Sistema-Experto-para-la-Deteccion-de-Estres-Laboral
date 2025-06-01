@@ -32,16 +32,16 @@ Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 
 ## Requisitos e instalación
 1. Clona este repositorio:
-   ```bash
+  
    git clone https://github.com/arytdf/Sistema-Experto-para-la-Deteccion-de-Estres-Laboral
    cd mi_sistema_experto
 
-2. ## (Opcional) Crea y activa un entorno virtual:
+## 2. Crea y activa un entorno virtual(Opcional):
 
 python -m venv venv
 source venv/bin/activate       # Windows: venv\Scripts\activate
 
-## Instala las dependencias:
+## 3. Instala las dependencias:
 pip install -r requerimientos.txt
 
 ## Cómo ejecutar la API
