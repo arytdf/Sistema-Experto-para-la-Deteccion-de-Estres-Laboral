@@ -8,21 +8,21 @@ Este proyecto implementa un sistema experto sencillo en Python que evalúa un co
 ```markdown
 Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 │
-├── docs/ # Documentación en PDF
-│ └── manual_sistema_experto.pdf
-│
-├── expert_system/ # Lógica del sistema experto
-│ ├── init.py
-│ ├── engine.py # Motor de inferencia
-│ └── reglas.py # Definición de reglas
-│
-├── app/ # API con FastAPI
+├── aplicacion/ # API con FastAPI
 │ ├── init.py
 │ ├── main.py # Punto de entrada de la API
 │ ├── schemas.py # Modelos Pydantic (entradas/salidas)
 │ └── routes.py # Endpoints REST
 │
-├── tests/ # Pruebas unitarias
+├── documentos/ # Documentación en PDF
+│ └── descripcion detallada del proyecto.pdf
+│
+├── sistema_experto/ # Lógica del sistema experto
+│ ├── init.py
+│ ├── engine.py # Motor de inferencia
+│ └── reglas.py # Definición de reglas
+│
+├── pruebas/ # Pruebas unitarias
 │ ├── init.py
 │ ├── test_engine.py
 │ └── test_api.py
