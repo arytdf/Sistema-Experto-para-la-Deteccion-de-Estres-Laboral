@@ -4,6 +4,8 @@ El proyecto consiste en el diseño e implementación de un Sistema Experto para 
 Este proyecto implementa un sistema experto sencillo en Python que evalúa un conjunto de reglas basadas en hechos de entrada y devuelve inferencias. La API está desarrollada con FastAPI para exponer un endpoint `/api/inferir` que recibe datos en JSON y responde con los resultados del motor de inferencia.
 
 ## Estructura del repositorio
+
+```markdown
 Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 │
 ├── docs/ # Documentación en PDF
