@@ -37,6 +37,7 @@ Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
    cd mi_sistema_experto
 
 ## (Opcional) Crea y activa un entorno virtual:
+```bash
 python -m venv venv
 source venv/bin/activate       # Windows: venv\Scripts\activate
 
