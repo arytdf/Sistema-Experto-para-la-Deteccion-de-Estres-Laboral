@@ -8,27 +8,34 @@ Este proyecto implementa un sistema experto sencillo en Python que evalúa un co
 ```markdown
 Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 │
-├── aplicacion/ # API con FastAPI
-│ ├── init.py
-│ ├── main.py # Punto de entrada de la API
-│ ├── schemas.py # Modelos Pydantic (entradas/salidas)
-│ └── routes.py # Endpoints REST
+├── aplicacion/               # API con FastAPI
+│   ├── __init__.py
+│   ├── main.py               # Punto de entrada de la API
+│   ├── schemas.py            # Modelos Pydantic
+│   ├── routes.py             # Endpoints REST
+│   ├── templates/            # Nuevo: Templates HTML/Jinja2
+│   │   └── index.html        # Template principal con HTMX
+│   └── static/               # Nuevo: Archivos estáticos
+│       ├── css/
+│       │   └── styles.css    # Estilos CSS
+│       └── js/
+│           └── scripts.js    # JavaScript adicional (si necesitas)
 │
-├── documentos/ # Documentación en PDF
-│ └── descripcion detallada del proyecto.pdf
+├── documentos/               # Documentación
+│   └── descripcion_detallada_del_proyecto.pdf
 │
-├── sistema_experto/ # Lógica del sistema experto
-│ ├── init.py
-│ ├── engine.py # Motor de inferencia
-│ └── reglas.py # Definición de reglas
+├── pruebas/                  # Pruebas unitarias
+│   ├── __init__.py
+│   ├── test_engine.py
+│   └── test_api.py
 │
-├── pruebas/ # Pruebas unitarias
-│ ├── init.py
-│ ├── test_engine.py
-│ └── test_api.py
+├── sistema_experto/          # Lógica del sistema experto
+│   ├── __init__.py
+│   ├── engine.py             # Motor de inferencia
+│   └── reglas.py             # Definición de reglas
 │
-├── requerimientos.txt # Dependencias del proyecto
-└── README.md # Esta guía
+├── requerimientos.txt        # Dependencias
+└── README.md                 # Documentación del proyecto
 
 ## Requisitos e instalación
 1. Clona este repositorio:
