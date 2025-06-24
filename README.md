@@ -1,114 +1,88 @@
-# Sistema-Experto-para-la-Deteccion-de-Estres-Laboral
-El proyecto consiste en el diseño e implementación de un Sistema Experto para la identificación temprana y manejo del estrés laboral.
-## Descripción
-Este proyecto implementa un sistema experto sencillo en Python que evalúa un conjunto de reglas basadas en hechos de entrada y devuelve inferencias. La API está desarrollada con FastAPI para exponer un endpoint `/api/inferir` que recibe datos en JSON y responde con los resultados del motor de inferencia.
+# Test de Estrés Laboral
 
-## Estructura del repositorio
+Este proyecto es una aplicación de Streamlit que permite evaluar el nivel de estrés laboral mediante un breve cuestionario de preguntas SÍ/NO, genera un diagnóstico y ofrece la opción de descargar un informe en PDF.
 
-```markdown
-Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
-│
-├── aplicacion/               # API con FastAPI
-│   ├── __init__.py
-│   ├── main.py               # Punto de entrada de la API
-│   ├── schemas.py            # Modelos Pydantic
-│   ├── routes.py             # Endpoints REST
-│   ├── templates/            # Nuevo: Templates HTML/Jinja2
-│   │   └── index.html        # Template principal con HTMX
-│   └── static/               # Nuevo: Archivos estáticos
-│       ├── css/
-│       │   └── styles.css    # Estilos CSS
-│       └── js/
-│           └── scripts.js    # JavaScript adicional (si necesitas)
-│
-├── documentos/               # Documentación
-│   └── descripcion_detallada_del_proyecto.pdf
-│
-├── pruebas/                  # Pruebas unitarias
-│   ├── __init__.py
-│   ├── test_engine.py
-│   └── test_api.py
-│
-├── sistema_experto/          # Lógica del sistema experto
-│   ├── __init__.py
-│   ├── engine.py             # Motor de inferencia
-│   └── reglas.py             # Definición de reglas
-│
-├── requerimientos.txt        # Dependencias
-└── README.md                 # Documentación del proyecto
+## Características
 
-## Requisitos e instalación
-1. Clona este repositorio:
-  
-   git clone https://github.com/arytdf/Sistema-Experto-para-la-Deteccion-de-Estres-Laboral
-   cd mi_sistema_experto
+- Pantalla de bienvenida con instrucciones.
+- Flujo de preguntas (árbol de decisión) con navegación ANTERIOR.
+- Pantalla de diagnóstico con recomendaciones.
+- Descarga de informe final en PDF.
+- Pantalla de despedida con opción de reiniciar el test.
 
-## 2. Crea y activa un entorno virtual(Opcional):
+## Estructura del proyecto
 
+```
+/SistemaExperto/
+│
+├── app.py               # Lógica principal de la app Streamlit
+├── styles.css           # Estilos personalizados en CSS
+├── requirements.txt     # Dependencias Python del proyecto
+├── sistema_experto.bat  # Script de Windows para setup y ejecución
+├── .gitignore           # Archivos y carpetas excluidas del repositorio
+├── data/                # Datos de entrada y recursos
+│   ├── reglas.yml       # Definición del árbol de reglas en YAML
+│   ├── reglas.json      # Regenerado desde reglas.yml para consumo de la app
+│   └── diagnosticos.json# Mensajes y recomendaciones finales
+└── documentos/          # Documentación y manuales adicionales
+    └── ManualUsuario.md # Guía de uso para el usuario
+```
+
+## Instalación
+
+Clona el repositorio o descárgalo como ZIP:
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd SistemaExperto
+```
+
+### Creación de entorno virtual (recomendado)
+
+Es importante usar un entorno virtual aislado para gestionar dependencias:
+
+```bash
+# Windows
 python -m venv venv
-source venv/bin/activate       # Windows: venv\Scripts\activate
+venv\\Scripts\\activate
 
-## 3. Instala las dependencias:
-pip install -r requerimientos.txt
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
-## Cómo ejecutar la API
-Para iniciar el servidor en modo desarrollo, ejecuta:
+### Instalación de dependencias
 
-uvicorn app.main:app --reload
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 
-Por defecto, la API estará disponible en http://localhost:8000. Puedes ver la documentación interactiva de Swagger en http://localhost:8000/docs.
+> **Sugerencia:** en Windows, ejecuta `sistema_experto.bat` para automatizar estos pasos, incluida la instalación de PyYAML necesaria para convertir archivos YAML a JSON.
 
-## Uso de la API (ejemplo)
-Envía una petición POST a /api/inferir con un JSON como este:
+## Uso
 
-{
-  "temperatura": 35,
-  "humedad": 70
-}
+```bash
+streamlit run app.py
+```
 
-Respuesta esperada:
+La aplicación abrirá en tu navegador predeterminado.
 
-{
-  "hechos": {
-    "temperatura": 35,
-    "humedad": 70,
-    "recomendacion": "Hace mucho calor, activar aire acondicionado"
-  }
-}
+## Archivo YAML a JSON
 
-Ajusta los campos de entrada según las variables que definas en tu sistema experto.
+En el proyecto, las reglas y diagnósticos pueden definirse en formato YAML para facilitar la edición. Utiliza PyYAML para convertirlos a JSON:
 
-## Documentación detallada
-Para más información sobre la lógica interna, el motor de inferencia, las reglas implementadas y ejemplos de casos de uso, descarga y consulta el PDF en:
-
-docs/manual_sistema_experto.pdf
-
-## Estructura del sistema experto
-expert_system/engine.py: Motor de inferencia que recorre las reglas definidas y genera nuevos hechos a partir de los datos de entrada.
-
-expert_system/rules.py: Conjunto de reglas representadas como funciones de antecedentes y conclusiones.
-
-app/schemas.py: Modelos Pydantic para validar y serializar la entrada y salida de datos.
-
-app/routes.py: Rutas de FastAPI que exponen el endpoint /api/inferir y llaman al motor de inferencia.
-
-tests/: Pruebas unitarias para verificar que el motor de inferencia y los endpoints funcionan correctamente.
-
-## Ejecutar pruebas
-Si deseas comprobar que todo funciona correctamente, instala pytest (si no está ya en requirements.txt) y ejecuta:
-
-pytest
-
-Los archivos de prueba se encuentran en tests/test_engine.py y tests/test_api.py.
+```bash
+python - << 'EOF'
+import yaml, json
+with open('data/reglas.yml', encoding='utf-8') as yf:
+    data = yaml.safe_load(yf)
+with open('data/reglas.json', 'w', encoding='utf-8') as jf:
+    json.dump(data, jf, ensure_ascii=False, indent=2)
+EOF
+```
 
 ## Licencia
-Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles (si decides agregar uno).
 
-## Autores y contacto
-Autor: Ariel M. Altamirano
-
-Correo: arytdf@gmail.com
-
-Si encuentras algún error o tienes sugerencias, abre un issue en GitHub o envía un correo a la dirección indicada.
-
-
+MIT License
+```
