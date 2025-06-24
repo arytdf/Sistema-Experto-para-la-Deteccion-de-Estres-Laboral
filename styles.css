@@ -1,5 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
-   styles.css – Test de Estrés Laboral (versión corregida)
+   styles.css – Test de Estrés Laboral
+   Organización clara, secciones numeradas y optimizadas
 ──────────────────────────────────────────────────────────── */
 
 /* 1) VARIABLES GLOBALES */
@@ -14,21 +15,29 @@
   --sombra:        0 4px 8px rgba(0, 0, 0, .08);
 }
 
-/* 2) RESET Y FONDO */
-body, .stApp {
-  margin: 0; padding: 0;
+/* 2) RESET GLOBAL Y FONDO */
+body,
+.stApp {
+  margin: 0;
+  padding: 0;
   background: var(--gris-fondo) !important;
   font-family: 'Montserrat', sans-serif;
 }
-header[role="banner"], footer { display: none !important; }
+header[role="banner"],
+footer {
+  display: none !important;
+}
 
-/* 3) TARJETA CENTRAL */
+/* 3) ESTRUCTURA PRINCIPAL */
 div[data-testid="stVerticalBlock"]:has(.header-test) {
   background: #fff;
   border-radius: 12px;
   width: 90%; max-width: 600px;
-  margin: 40px auto; padding-bottom: 64px;
+  margin: 40px auto;
+  padding-bottom: 64px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, .12);
+  position: relative;
+  overflow: visible;
 }
 
 /* 4) ENCABEZADO */
@@ -41,21 +50,65 @@ div[data-testid="stVerticalBlock"]:has(.header-test) {
   margin-bottom: 22px;
 }
 .header-test h1 {
-  margin: 0; font-size: 1.45rem; font-weight: 700; color: #111827;
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #111827;
 }
 
-/* 5) CAJA DE PREGUNTA */
-.box-pregunta, .box_pregunta {
+/* 5) CAJAS DE TEXTO */
+.box-pregunta,
+.box_pregunta {
   margin: 0 auto 28px;
   padding: 22px 20px;
   max-width: 480px;
   text-align: center;
   border: 2px solid var(--verde-header);
   border-radius: 8px;
-  font-size: 1.1rem; font-weight: 700; color: #111827;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+.diag-box {
+  margin: 0 auto 24px;
+  padding: 22px 20px;
+  max-width: 480px;
+  border: 2px solid var(--verde-header);
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111827;
+}
+.diag-box h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.diag-box h5 {
+  margin: 12px 0 6px;
+  font-size: .95rem;
+  font-weight: 600;
 }
 
-/* 6) BOTONES DE PREGUNTAS (SÍ / NO / ←) */
+/* 6) CAJA DE BIENVENIDA */
+.welcome-box {
+  background: rgba(243, 244, 246, 0.95) !important;
+  border: 1px solid var(--borde-gris);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px 20px;
+  width: 90% !important;
+  max-width: 480px;
+  margin: -16px auto 24px; /* superpone debajo del header */
+  color: #111827;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  z-index: 10;
+  position: relative;
+}
+
+/* 7) BOTONES DE INTERACCIÓN */
 .stButton > button {
   width: 100% !important;
   height: 56px !important;
@@ -76,58 +129,13 @@ div[data-testid="stVerticalBlock"]:has(.header-test) {
 .stButton > button:active {
   transform: translateY(1px) scale(.97) !important;
 }
-
-/* 7) CAJA DE DIAGNÓSTICO */
-.diag-box {
-  margin: 0 auto 24px;
-  padding: 22px 20px;
-  max-width: 480px;
-  border: 2px solid var(--verde-header);
-  border-radius: 8px;
-  font-size: 1rem; line-height: 1.5; color: #111827;
+button[data-testid="baseButton-primary"] {
+  background: var(--verde-main) !important;
+  border: 2px solid var(--verde-main) !important;
+  color: #fff !important;
 }
-.diag-box h3 {
-  margin: 0 0 6px; font-size: 1.1rem; font-weight: 700;
-}
-.diag-box h5 {
-  margin: 12px 0 6px; font-size: .95rem; font-weight: 600;
-}
-
-/* 8) BOTONES DE DIAGNÓSTICO (REINICIAR Y FINALIZAR)
-   - restauramos el estilo original, dos botones iguales y
-   - Finalizar mantiene fondo verde primario
-────────────────────────────────────────────────────────── */
 #btn_reiniciar button,
-#btn_finalizar button {
-  width: 100% !important;
-  height: 56px !important;          /* igual al resto */
-  border-radius: 6px !important;
-  font-size: 1.05rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  background: var(--gris-btn) !important;
-  border: 2px solid var(--borde-verde) !important;
-  color: #111827 !important;
-  transition: transform .05s, background .15s !important;
-}
-/* Hover */
-#btn_reiniciar button:hover:not(:disabled),
-#btn_finalizar button:hover:not(:disabled) {
-  background: var(--verde-header) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: var(--sombra) !important;
-}
-/* Finalizar: override a primario */
-#btn_finalizar button {
-  /* Si deseás que Finalizar sea verde sólido, quita estas dos líneas */
-  /* background: var(--verde-main) !important;
-     border-color: var(--verde-main) !important; */
-}
-
-/* 9) DOWNLOAD BUTTON
-   - idéntico a Reiniciar: ancho, alto, borde y hover igual
-   - override completo de cualquier estilo primario
-────────────────────────────────────────────────────────── */
+#btn_finalizar button,
 .stDownloadButton > button,
 .stDownloadButton > button[data-testid="baseButton-primary"] {
   width: 100% !important;
@@ -141,6 +149,8 @@ div[data-testid="stVerticalBlock"]:has(.header-test) {
   color: #111827 !important;
   transition: transform .05s, background .15s !important;
 }
+#btn_reiniciar button:hover:not(:disabled),
+#btn_finalizar button:hover:not(:disabled),
 .stDownloadButton > button:hover:not(:disabled),
 .stDownloadButton > button[data-testid="baseButton-primary"]:hover:not(:disabled) {
   background: var(--verde-header) !important;
@@ -148,22 +158,36 @@ div[data-testid="stVerticalBlock"]:has(.header-test) {
   box-shadow: var(--sombra) !important;
 }
 
-/* 10) ALERTAS */
+/* 8) ALERTA DE DESPEDIDA */
 .stAlert {
   max-width: 480px;
-  margin: 16px auto;
-  padding: 12px 16px;
-  border-radius: 8px;
-  background: var(--verde-header);
-  border: 1px solid var(--verde-main);
+  margin: 16px auto 24px;
+  background: #f3f4f6 !important;
+  border: 1px solid var(--borde-gris) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+  padding: 16px 20px !important;
   color: #111827;
 }
+.stAlert > div:first-child {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
-/* 11) RESPONSIVE MÓVIL */
+/* 9) RESPONSIVE (Móvil) */
 @media (max-width: 480px) {
-  .header-test h1 { font-size: 1.25rem; }
-  .box-pregunta, .diag-box {
-    padding: 18px 14px; margin: 16px auto; font-size: 1rem;
+  .header-test h1 {
+    font-size: 1.25rem;
+  }
+  .box-pregunta,
+  .diag-box,
+  .welcome-box {
+    padding: 12px 14px;
+    margin: 12px auto;
+    font-size: 0.95rem;
   }
   .stButton > button,
   #btn_reiniciar button,
@@ -173,90 +197,6 @@ div[data-testid="stVerticalBlock"]:has(.header-test) {
     font-size: 1rem !important;
   }
 }
-
-/* ──────────────────────────────────────────────────────────
-   ALERTA DE DESPEDIDA: fondo gris claro + sombra
-────────────────────────────────────────────────────────── */
-.stAlert {
-  /* Fondo gris claro */
-  background: #f3f4f6 !important;
-
-  /* Sombra suave */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-
-  /* Conserva padding y bordes para que quede recuadro */
-  padding: 16px 20px !important;
-  border: 1px solid var(--borde-gris) !important;
-  border-radius: 8px !important;
-
-  /* Centramos y limitamos ancho */
-  max-width: 480px;
-  margin: 0 auto 24px;
-}
-
-/* ──────────────────────────────────────────────────────────
-   Override para quitar el fondo verde interno de st.success
-────────────────────────────────────────────────────────── */
-/* 1) Hacemos transparente el primer hijo que Streamlit pinta */
-.stAlert > div:first-child {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* 2) Ajustamos el contenido para que herede nuestro estilo de .stAlert */
-.stAlert {
-  /* tu recuadro gris con sombra */
-  background: #f3f4f6 !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
-  border: 1px solid var(--borde-gris) !important;
-  border-radius: 8px !important;
-  padding: 16px 20px !important;
-  max-width: 480px;
-  margin: 0 auto 24px;
-}
-
-/* ──────────────────────────────────────────────────────────
-   Recuadro gris claro con sombra para la sección de bienvenida
-────────────────────────────────────────────────────────── */
-.welcome-box {
-  background: #f3f4f6;
-  border: 1px solid var(--borde-gris);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 16px 20px;
-  max-width: 480px;
-  margin: 0 auto 24px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
