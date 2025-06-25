@@ -18,14 +18,18 @@ Este proyecto es una aplicación de Streamlit que permite evaluar el nivel de es
 ├── app.py               # Lógica principal de la app Streamlit
 ├── styles.css           # Estilos personalizados en CSS
 ├── requirements.txt     # Dependencias Python del proyecto
-├── sistema_experto.bat  # Script de Windows para setup y ejecución
+├── sistema_experto.bat  # Script de Windows para setup y ejecución del sistema experto
 ├── .gitignore           # Archivos y carpetas excluidas del repositorio
 ├── data/                # Datos de entrada y recursos
+│   ├── convert_yml_to_json.bat # Scrip de Windows que convierte el archivo YAML a JSON
 │   ├── reglas.yml       # Definición del árbol de reglas en YAML
+│   ├── generate_json.py # Genera el archivo reglas de YAML a JSON. 
 │   ├── reglas.json      # Regenerado desde reglas.yml para consumo de la app
 │   └── diagnosticos.json# Mensajes y recomendaciones finales
 └── documentos/          # Documentación y manuales adicionales
-    └── ManualUsuario.md # Guía de uso para el usuario
+    └── Descripción detallada del proyecto.pdf 
+    └── Diagrama final de SE con identificion de nodo.png # Imagen del arbol de decisiones
+    └── Representación y Organización del conocimiento.pdf #     
 ```
 
 ## Instalación
