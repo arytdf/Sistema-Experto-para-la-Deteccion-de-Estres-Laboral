@@ -20,11 +20,28 @@ BASE = Path(__file__).parent
 with open(BASE / "styles.css", encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# ───── Carga de datos ──────────────────────────────────────────
+# ───── Carga de datos CORREGIDA ───────────────────────────────
 with open(BASE / "data/reglas.json", encoding="utf-8") as f:
-    REGLAS = json.load(f)
+    reglas_data = json.load(f)
+    # Crear diccionario de reglas
+    REGLAS = {}
+    for item in reglas_data.get('entries', []):
+        REGLAS[item['name']] = item['props']
+
 with open(BASE / "data/diagnosticos.json", encoding="utf-8") as f:
-    DIAG = json.load(f)
+    diag_data = json.load(f)
+    # Crear diccionario de diagnósticos
+    DIAG = {}
+    for item in diag_data.get('entries', []):
+        # Unir lista QUE_HACER con saltos de línea
+        if 'QUE_HACER' in item['props'] and isinstance(item['props']['QUE_HACER'], list):
+            item['props']['QUE_HACER'] = "\n".join(item['props']['QUE_HACER'])
+        DIAG[item['name']] = item['props']
+
+# Asegurar que los nodos de diagnóstico estén en REGLAS
+for key in DIAG.keys():
+    if key not in REGLAS:
+        REGLAS[key] = DIAG[key]
 
 # ───── Estado de sesión ────────────────────────────────────────
 DEFAULT_STATE = {"pagina": "inicio", "nodo_actual": "B", "historial": [], "respuestas": []}
@@ -148,34 +165,3 @@ else:
     cols = st.columns([1, 4, 4, 1], gap="small")
     cols[1].download_button("DESCARGAR INFORME EN PDF", data=generar_pdf(), file_name="informe_estres_laboral.pdf", mime="application/pdf", key="btn_pdf", use_container_width=True)
     cols[2].button("REALIZAR NUEVAMENTE", key="btn_new", use_container_width=True, on_click=reiniciar_test)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
