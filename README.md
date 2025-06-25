@@ -1,92 +1,186 @@
-# Test de Estrés Laboral
+# Sistema Experto para la Detección de Estrés Laboral en Tierra del Fuego
 
-Este proyecto es una aplicación de Streamlit que permite evaluar el nivel de estrés laboral mediante un breve cuestionario de preguntas SÍ/NO, genera un diagnóstico y ofrece la opción de descargar un informe en PDF.
+Este proyecto implementa un **Sistema Experto** para la detección temprana de estrés laboral, desarrollado en *Python* con **Streamlit**.  
+Se apoya en un árbol de decisión clínico validado por especialistas para evaluar síntomas físicos, emocionales y factores laborales, generando un **diagnóstico personalizado** con recomendaciones y un **informe PDF** descargable.
 
-## Características
+Desarrollado como proyecto académico para el *Politécnico Malvinas Argentinas* bajo la dirección del **Prof. Martín Mirabete**.
 
-- Pantalla de bienvenida con instrucciones.
-- Flujo de preguntas (árbol de decisión) con navegación ANTERIOR.
-- Pantalla de diagnóstico con recomendaciones.
-- Descarga de informe final en PDF.
-- Pantalla de despedida con opción de reiniciar el test.
+---
 
-## Estructura del proyecto
+## 🌐 Demo en Vivo
 
-```
-/SistemaExperto/
+[Acceda a la aplicación desplegada en Streamlit Cloud](https://sistema-experto-para-la-deteccion-de-estres-laboral.streamlit.app/)
+
+---
+
+## 🔍 Características Principales
+
+- **Cuestionario interactivo**: flujo adaptativo de preguntas **SÍ / NO** con navegación **AVANZAR** y **VOLVER**.  
+- **Diagnóstico por niveles de riesgo**:  
+  - 🔴 **Alto** – intervención urgente.  
+  - 🟠 **Moderado** – acciones correctivas.  
+  - 🟡 **Leve** – monitoreo y recomendaciones.  
+  - 🟢 **Bajo** – refuerzo positivo.  
+- **Informe clínico en PDF**: descarga personalizada con resultados y recomendaciones.  
+- **Arquitectura modular**: separación entre motor de inferencia e interfaz.  
+- **Base de conocimiento validada**: por la psicóloga **Micaela Barria**, especialista en estrés laboral.  
+- **Diseño *responsive***: experiencia óptima en escritorio y móviles.  
+
+---
+
+## ⚙️ Tecnologías Utilizadas
+
+| Componente            | Tecnología                  | Función                                    |
+|-----------------------|-----------------------------|--------------------------------------------|
+| Front‑end             | **Streamlit**               | Interfaz web interactiva                   |
+| Back‑end              | **Python&nbsp;3.10**        | Lógica de la aplicación                    |
+| Motor de inferencia   | **JSON + Forward Chaining** | Procesamiento de reglas                    |
+| Generación de PDF     | **ReportLab + PyPDF2**      | Creación de informes                       |
+| Gestión de reglas     | **YAML / JSON**             | Base de conocimiento                       |
+| Despliegue            | **Streamlit Community Cloud** | Hosting gratuito en la nube               |
+
+---
+
+## 📁 Estructura del Proyecto
+```text
+/Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 │
-├── app.py               # Lógica principal de la app Streamlit
-├── styles.css           # Estilos personalizados en CSS
-├── requirements.txt     # Dependencias Python del proyecto
-├── sistema_experto.bat  # Script de Windows para setup y ejecución del sistema experto
-├── .gitignore           # Archivos y carpetas excluidas del repositorio
-├── data/                # Datos de entrada y recursos
-│   ├── convert_yml_to_json.bat # Scrip de Windows que convierte el archivo YAML a JSON
-│   ├── reglas.yml       # Definición del árbol de reglas en YAML
-│   ├── generate_json.py # Genera el archivo reglas de YAML a JSON. 
-│   ├── reglas.json      # Regenerado desde reglas.yml para consumo de la app
-│   └── diagnosticos.json# Mensajes y recomendaciones finales
-└── documentos/          # Documentación y manuales adicionales
-    └── Descripción detallada del proyecto.pdf 
-    └── Diagrama final de SE con identificion de nodo.png # Imagen del arbol de decisiones
-    └── Representación y Organización del conocimiento.pdf #     
+├── app.py                # Lógica principal de la app Streamlit
+├── styles.css            # Estilos personalizados
+├── requirements.txt      # Dependencias Python
+├── sistema_experto.bat   # Script Windows para setup y ejecución
+├── .gitignore            # Exclusiones de Git
+├── data/                 # Datos y recursos
+│   ├── convert_yml_to_json.bat  # Conversor YAML → JSON (Windows)
+│   ├── reglas.yml        # Árbol de reglas (editable)
+│   ├── generate_json.py  # Script de conversión YAML → JSON
+│   ├── reglas.json       # Reglas en JSON para la app
+│   └── diagnosticos.json # Mensajes de diagnóstico
+└── documentos/           # Documentación adicional
+    ├── Descripción detallada del proyecto.pdf
+    ├── Diagrama SE con identificación de nodos.png
+    └── Representación y Organización del conocimiento.pdf
 ```
 
-## Instalación
+---
 
-Clona el repositorio o descárgalo como ZIP:
+## 🗂️ Base de Conocimiento
 
+El sistema se basa en reglas *if‑then* fundamentadas en:
+
+- **Modelo de Karasek** (carga laboral vs. control).  
+- **Inventario de Burnout de Maslach**.  
+- **Guías de la OMS** para manejo del estrés.  
+- Criterios clínicos validados por la **Psic. Micaela Barria**.  
+
+### Clasificación de Riesgo
+
+| Nivel      | Color | Acción recomendada            |
+|------------|-------|-------------------------------|
+| Alto       | 🔴    | Intervención urgente          |
+| Moderado   | 🟠    | Acciones correctivas          |
+| Leve       | 🟡    | Monitoreo y prevención        |
+| Bajo       | 🟢    | Refuerzo positivo             |
+
+---
+
+## 🚀 Instalación y Ejecución
+
+### Prerrequisitos
+- **Python 3.10** o superior  
+- **Git** (opcional)  
+
+### Pasos para ejecutar localmente
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd SistemaExperto
-```
+# 1. Clonar repositorio
+git clone https://github.com/arvtdf/Sistema-Experto-para-la-Deteccion-de-Estres-Laboral.git
+cd Sistema-Experto-para-la-Deteccion-de-Estres-Laboral
 
-### Creación de entorno virtual (recomendado)
-
-Es importante usar un entorno virtual aislado para gestionar dependencias:
-
-```bash
-# Windows
+# 2. Crear y activar entorno virtual
 python -m venv venv
-venv\\Scripts\\activate
-
-# macOS/Linux
-python3 -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux / macOS
 source venv/bin/activate
-```
 
-### Instalación de dependencias
-
-```bash
-pip install --upgrade pip
+# 3. Instalar dependencias
 pip install -r requirements.txt
-```
 
-> **Sugerencia:** en Windows, ejecuta `sistema_experto.bat` para automatizar estos pasos, incluida la instalación de PyYAML necesaria para convertir archivos YAML a JSON.
+# 4. (Opcional) Convertir reglas YAML → JSON si modificaste reglas.yml
+python -c "import yaml, json; data = yaml.safe_load(open('data/reglas.yml')); open('data/reglas.json','w').write(json.dumps(data, indent=2))"
 
-## Uso
-
-```bash
+# 5. Ejecutar aplicación
 streamlit run app.py
 ```
 
-La aplicación abrirá en tu navegador predeterminado.
-
-## Archivo YAML a JSON
-
-En el proyecto, las reglas y diagnósticos pueden definirse en formato YAML para facilitar la edición. Utiliza PyYAML para convertirlos a JSON:
-
-```bash
-python - << 'EOF'
-import yaml, json
-with open('data/reglas.yml', encoding='utf-8') as yf:
-    data = yaml.safe_load(yf)
-with open('data/reglas.json', 'w', encoding='utf-8') as jf:
-    json.dump(data, jf, ensure_ascii=False, indent=2)
-EOF
+### Ejecución rápida en Windows
+```cmd
+sistema_experto.bat
 ```
 
-## Licencia
+---
 
-MIT License
-```
+## 📡 Uso en Línea
+
+La aplicación está disponible 24/7 en:  
+<https://sistema-experto-para-la-deteccion-de-estres-laboral.streamlit.app/>
+
+Flujo principal del usuario:
+
+1. **Pantalla inicial** – explicación del test y consentimiento informado.  
+2. **Cuestionario adaptativo** – 10‑15 preguntas SÍ/NO con navegación bidireccional.  
+3. **Diagnóstico personalizado** – nivel de riesgo y explicación.  
+4. **Generación de PDF** – informe completo con recomendaciones.  
+5. **Pantalla final** – opción para reiniciar el test o compartir resultados.  
+
+---
+
+## 💡 ¿Por qué Streamlit?
+
+- **Desarrollo rápido**: Apps web interactivas con solo Python.  
+- **Interactividad nativa**: Widgets integrados; sin JavaScript.  
+- **Arquitectura SPA**: *Single‑Page Application* ideal para flujos secuenciales.  
+- **Despliegue sin servidores**: Publicación en la nube con un clic.  
+- **Separación de preocupaciones**: Lógica y presentación limpias.  
+
+### Alternativas consideradas
+- **Flask / FastAPI** – requirieron más desarrollo front‑end.  
+- **Gradio** – menor flexibilidad para flujos complejos.  
+- **Apps nativas** – mayor complejidad de distribución.  
+
+---
+
+## 👩‍⚕️ Aporte Clínico
+
+El conocimiento experto validado por la **Psic. Micaela Barria** garantiza:
+
+- Detección temprana de síntomas físicos y emocionales.  
+- Evaluación de factores laborales críticos (horas extra, autonomía, apoyo).  
+- Estrategias de mitigación personalizadas.  
+- Prevención de *burnout* y ausentismo laboral.  
+
+---
+
+## 📄 Licencia
+
+Distribuido bajo licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+## ✍️ Autor
+
+**Ariel Martín Altamirano**  
+Desarrollo de Sistemas de IA – 2025  
+Universidad Nacional de Tierra del Fuego  
+
+
+
+
+
+
+
+
+
+
+
+
