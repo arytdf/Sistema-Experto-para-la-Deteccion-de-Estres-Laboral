@@ -100,20 +100,54 @@ def finalizar_evaluacion():
 
 # Interfaz de usuario
 if st.session_state.pagina == "inicio":
-    st.markdown('<div class="header-test"><h1>Evaluación de Estrés Laboral</h1></div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="welcome-box">
-        <p>Este sistema experto evalúa tu nivel de estrés laboral utilizando criterios validados científicamente por:</p>
-        <ul>
-            <li>Organización Mundial de la Salud (OMS)</li>
-            <li>Asociación Americana de Psicología (APA)</li>
-            <li>Modelos de evaluación de estrés laboral</li>
-        </ul>
-        <p>Al finalizar, recibirás un diagnóstico personalizado con recomendaciones basadas en evidencia.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Encabezado con estilo similar a la imagen
+    st.markdown(
+        """
+        <div style="
+            background-color: #d1ecd1;
+            padding: 30px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+            margin-bottom: 0;
+        ">
+            <h1 style="color: #111827; margin: 0;">¡Bienvenido/a!</h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
-    st.button("COMENZAR EVALUACIÓN", on_click=comenzar_evaluacion, use_container_width=True)
+    # Caja de bienvenida con texto similar a la imagen
+    st.markdown(
+        """
+        <div style="
+            background-color: #f3f4f6;
+            border-radius: 0 0 12px 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        ">
+            <p style="font-size: 1.1rem; color: #111827; line-height: 1.6;">
+                Bienvenido/a al Test de Estrés Laboral. A través de preguntas breves,
+                identificarás tu nivel de estrés laboral, sus posibles causas y obtendrás recomendaciones.
+            </p>
+            <p style="font-size: 1.1rem; color: #111827; line-height: 1.6;">
+                Presiona <strong>COMENZAR TEST</strong> y responde SÍ o NO.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Botón centrado y con estilo
+    cols = st.columns([1, 3, 1])
+    with cols[1]:
+        st.button(
+            "COMENZAR TEST", 
+            on_click=comenzar_evaluacion, 
+            use_container_width=True,
+            key="comenzar_test"
+        )
 
 elif st.session_state.pagina == "preguntas":
     st.markdown('<div class="header-test"><h1>Evaluación de Estrés Laboral</h1></div>', unsafe_allow_html=True)
@@ -244,4 +278,4 @@ elif st.session_state.pagina == "despedida":
 
 # Pie de página
 st.markdown("---")
-st.caption("Sistema Experto para Evaluación de Estrés Laboral - © 2023")
+st.caption("Sistema Experto para Evaluación de Estrés Laboral - © 2025")

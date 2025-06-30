@@ -14,9 +14,10 @@ h1, h2, h3, h4 {
 
 /* Contenedor principal */
 .stApp {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #f0f2f6;
 }
 
 /* Cajas de contenido */
@@ -56,33 +57,37 @@ h1, h2, h3, h4 {
 
 /* Botones principales */
 .stButton>button {
-    background-color: #4CAF50 !important; /* Color verde */
+    background-color: #4CAF50 !important;
     color: white !important;
     border: none !important;
-    padding: 12px 24px !important;
+    padding: 14px 28px !important;
     text-align: center !important;
     text-decoration: none !important;
     display: inline-block !important;
-    font-size: 16px !important;
-    margin: 4px 2px !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin: 10px 2px !important;
     cursor: pointer !important;
     border-radius: 8px !important;
     transition: all 0.3s ease !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+    width: 100% !important;
 }
 
-/* Hover para botones */
 .stButton>button:hover {
     background-color: #45a049 !important;
-    transform: translateY(-2px) !important;
+    transform: translateY(-3px) !important;
     box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
 }
 
 /* Botones de opciones */
 div[data-testid="column"] button {
-    background-color: #2196F3 !important; /* Color azul */
+    background-color: #4CAF50 !important;
     margin: 5px !important;
     padding: 10px 15px !important;
+    font-weight: bold !important;
+    color: white !important;
+    border-radius: 6px !important;
 }
 
 /* Asegurar visibilidad del texto */
@@ -94,7 +99,7 @@ div[data-testid="column"] button {
 
 /* Barra de progreso */
 .stProgress>div>div>div {
-    background-color: #3498db !important;
+    background-color: #34db3c !important;
 }
 
 /* Expander */
@@ -115,4 +120,53 @@ footer {
 /* Mensajes informativos */
 .stAlert {
     border-radius: 8px !important;
+}
+
+/* Encabezado de preguntas */
+.header-test {
+    background-color: #d1ecd1;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-test h1 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+/* Caja de preguntas */
+.question-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+}
+
+/* Plan de acción */
+.action-plan {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .stApp {
+        padding: 10px;
+    }
+    
+    .stButton>button {
+        padding: 12px 20px !important;
+        font-size: 16px !important;
+    }
+    
+    .question-box {
+        padding: 15px;
+        font-size: 1rem;
+    }
 }

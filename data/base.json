@@ -1,260 +1,161 @@
 {
-    "sintomas": {
-        "S1": {
-            "id": "S1",
-            "pregunta": "¿Ha experimentado dificultades para conciliar el sueño en la última semana?",
-            "explicacion": "Los problemas para dormir son un indicador temprano de estrés"
-        },
-        "S2": {
-            "id": "S2",
-            "pregunta": "¿Con qué frecuencia ha tenido dolores de cabeza o migrañas?",
-            "opciones": {
-                "A": "Nunca o casi nunca",
-                "B": "Algunas veces",
-                "C": "Frecuentemente",
-                "D": "Casi todos los días"
-            }
-        },
-        "S3": {
-            "id": "S3",
-            "pregunta": "¿Se siente irritable o tiene arrebatos de ira con frecuencia?",
-            "explicacion": "Los cambios de humor son comunes en situaciones de estrés prolongado"
-        },
-        "S4": {
-            "id": "S4",
-            "pregunta": "¿Experimenta tensión muscular en cuello, hombros o espalda?",
-            "opciones": {
-                "A": "Raramente",
-                "B": "Ocasionalmente",
-                "C": "Frecuentemente",
-                "D": "Constantemente"
-            }
-        },
-        "S5": {
-            "id": "S5",
-            "pregunta": "¿Ha notado cambios significativos en su apetito?",
-            "opciones": {
-                "A": "Sin cambios",
-                "B": "Leve aumento/disminución",
-                "C": "Cambio moderado",
-                "D": "Cambio severo"
-            }
-        },
-        "S6": {
-            "id": "S6",
-            "pregunta": "¿Siente que no puede desconectar del trabajo fuera del horario laboral?",
-            "explicacion": "La incapacidad para desconectar es un signo clave de estrés laboral"
-        },
-        "S7": {
-            "id": "S7",
-            "pregunta": "¿Con qué frecuencia siente que no puede cumplir con todas sus tareas?",
-            "opciones": {
-                "A": "Nunca",
-                "B": "Raramente",
-                "C": "Frecuentemente",
-                "D": "Siempre"
-            }
-        },
-        "S8": {
-            "id": "S8",
-            "pregunta": "¿Experimenta palpitaciones o taquicardia en situaciones laborales?",
-            "explicacion": "Síntomas físicos pueden indicar estrés crónico"
-        },
-        "S9": {
-            "id": "S9",
-            "pregunta": "¿Ha disminuido su rendimiento laboral en los últimos meses?",
-            "opciones": {
-                "A": "No, mantengo mi rendimiento",
-                "B": "Ligera disminución",
-                "C": "Disminución notable",
-                "D": "Disminución severa"
-            }
-        },
-        "S10": {
-            "id": "S10",
-            "pregunta": "¿Siente que su trabajo no es reconocido o valorado?",
-            "explicacion": "La falta de reconocimiento es una fuente común de estrés"
-        },
-        "S11": {
-            "id": "S11",
-            "pregunta": "¿Con qué frecuencia tiene pensamientos negativos sobre su trabajo?",
-            "opciones": {
-                "A": "Nunca",
-                "B": "Ocasionalmente",
-                "C": "Frecuentemente",
-                "D": "Constantemente"
-            }
-        },
-        "S12": {
-            "id": "S12",
-            "pregunta": "¿Ha aumentado su consumo de cafeína, tabaco o alcohol recientemente?",
-            "explicacion": "El aumento de sustancias puede ser un mecanismo de afrontamiento"
-        },
-        "S13": {
-            "id": "S13",
-            "pregunta": "¿Experimenta dificultades para concentrarse en sus tareas?",
-            "opciones": {
-                "A": "Nunca",
-                "B": "Raramente",
-                "C": "Frecuentemente",
-                "D": "Siempre"
-            }
-        },
-        "S14": {
-            "id": "S14",
-            "pregunta": "¿Siente que no tiene control sobre su carga de trabajo?",
-            "explicacion": "La falta de control es un factor de riesgo para estrés laboral"
-        },
-        "S15": {
-            "id": "S15",
-            "pregunta": "¿Ha tenido problemas digestivos sin causa médica aparente?",
-            "opciones": {
-                "A": "No",
-                "B": "Leves ocasionales",
-                "C": "Moderados frecuentes",
-                "D": "Severos constantes"
-            }
-        },
-        "S16": {
-            "id": "S16",
-            "pregunta": "¿Siente que su vida personal se ve afectada negativamente por su trabajo?",
-            "explicacion": "El desequilibrio trabajo-vida es un indicador clave"
-        },
-        "S17": {
-            "id": "S17",
-            "pregunta": "¿Con qué frecuencia se siente agotado al final del día?",
-            "opciones": {
-                "A": "Raramente",
-                "B": "Algunos días",
-                "C": "La mayoría de los días",
-                "D": "Todos los días"
-            }
-        },
-        "S18": {
-            "id": "S18",
-            "pregunta": "¿Ha considerado dejar su trabajo debido al estrés?",
-            "explicacion": "La intención de renunciar es una señal de alerta"
-        },
-        "S19": {
-            "id": "S19",
-            "pregunta": "¿Experimenta mareos o vértigos sin causa médica?",
-            "opciones": {
-                "A": "Nunca",
-                "B": "Raramente",
-                "C": "Frecuentemente",
-                "D": "Constantemente"
-            }
-        },
-        "S20": {
-            "id": "S20",
-            "pregunta": "¿Siente que no tiene tiempo suficiente para completar sus tareas?",
-            "explicacion": "La presión de tiempo es un factor estresante común"
-        },
-        "S21": {
-            "id": "S21",
-            "pregunta": "¿Ha faltado al trabajo debido a problemas de salud relacionados con el estrés?",
-            "opciones": {
-                "A": "Nunca",
-                "B": "1-2 días",
-                "C": "3-5 días",
-                "D": "Más de 5 días"
-            }
-        }
+  "sintomas": {
+    "S1": {
+      "id": "S1",
+      "pregunta": "¿Ha experimentado dificultades para conciliar el sueño en la última semana?",
+      "explicacion": "Los problemas para dormir son un indicador temprano de estrés"
     },
-    "reglas": [
-        {
-            "condiciones": ["S1", "S2-D", "S3"],
-            "diagnostico": "AS"
-        },
-        {
-            "condiciones": ["S1", "S2-C"],
-            "diagnostico": "AM"
-        },
-        {
-            "condiciones": ["S2-B", "S3", "S7-C"],
-            "diagnostico": "AM"
-        },
-        {
-            "condiciones": ["S4-D", "S6", "S8"],
-            "diagnostico": "AS"
-        },
-        {
-            "condiciones": ["S5-D", "S9-D", "S11-D"],
-            "diagnostico": "AS"
-        },
-        {
-            "condiciones": ["S12", "S14", "S16"],
-            "diagnostico": "AM"
-        },
-        {
-            "condiciones": ["S13-C", "S15-C", "S17-C"],
-            "diagnostico": "AM"
-        },
-        {
-            "condiciones": ["S18", "S20", "S21-C"],
-            "diagnostico": "AS"
-        },
-        {
-            "condiciones": ["S19-D", "S3", "S8"],
-            "diagnostico": "AS"
-        },
-        {
-            "condiciones": ["S2-C", "S5-B", "S7-B"],
-            "diagnostico": "AL"
-        },
-        {
-            "condiciones": ["S10", "S11-B", "S14"],
-            "diagnostico": "AL"
-        },
-        {
-            "condiciones": ["S15-B", "S17-B", "S20"],
-            "diagnostico": "AL"
-        },
-        {
-            "condiciones": ["S1", "S2-B", "S5-A"],
-            "diagnostico": "CA"
-        },
-        {
-            "condiciones": ["S3", "S4-A", "S6"],
-            "diagnostico": "CA"
-        },
-        {
-            "condiciones": ["S7-A", "S9-A", "S11-A"],
-            "diagnostico": "CA"
-        },
-        {
-            "condiciones": ["S13-A", "S16", "S18"],
-            "diagnostico": "CA"
-        },
-        {
-            "condiciones": ["S19-A", "S21-A"],
-            "diagnostico": "CA"
-        }
-    ],
-    "diagnosticos": {
-        "CA": {
-            "DIAGNOSTICO": "🟢 Estrés bajo - Control adecuado",
-            "RIESGO": "Leve",
-            "RECOMENDACION": "Mantener hábitos saludables",
-            "QUE_HACER": "Continúe con sus rutinas de autocuidado:\n\n- Duerma 7-8 horas diarias\n- Realice actividad física regular\n- Mantenga una alimentación balanceada\n- Practique técnicas de relajación 10 minutos al día\n\nSugerencias adicionales:\n\n- Establezca límites claros entre trabajo y vida personal\n- Tome descansos regulares durante la jornada laboral\n- Fomente relaciones positivas en el entorno laboral"
-        },
-        "AL": {
-            "DIAGNOSTICO": "🟡 Estrés moderado - Atención necesaria",
-            "RIESGO": "Moderado",
-            "RECOMENDACION": "Implementar estrategias de manejo de estrés",
-            "QUE_HACER": "Plan de acción recomendado:\n\n1. Identifique fuentes específicas de estrés\n2. Establezca prioridades claras en sus tareas\n3. Practique técnicas de respiración profunda 3 veces al día\n4. Implemente la técnica Pomodoro (25 min trabajo/5 min descanso)\n5. Realice ejercicio aeróbico mínimo 30 minutos 3 veces/semana\n6. Limite el consumo de cafeína a 2 tazas diarias\n7. Consulte con un especialista si los síntomas persisten después de 2 semanas"
-        },
-        "AM": {
-            "DIAGNOSTICO": "🟠 Estrés alto - Intervención recomendada",
-            "RIESGO": "Alto",
-            "RECOMENDACION": "Tomar medidas preventivas inmediatas",
-            "QUE_HACER": "Acciones prioritarias:\n\n- Programe una evaluación médica completa\n- Inicie sesiones de terapia cognitivo-conductual\n- Implemente un plan de gestión del tiempo estricto\n- Realice ejercicios de mindfulness 15 minutos diarios\n- Establezca horarios fijos para desconexión digital\n- Priorice 7-8 horas de sueño de calidad\n- Considere apoyo farmacológico si lo recomienda un profesional\n\nMedidas organizacionales:\n\n- Solicite ajustes razonables en su carga laboral\n- Explore opciones de trabajo flexible\n- Participe en programas de bienestar laboral"
-        },
-        "AS": {
-            "DIAGNOSTICO": "🔴 Estrés severo - Atención inmediata requerida",
-            "RIESGO": "Muy alto",
-            "RECOMENDACION": "Buscar apoyo profesional urgente",
-            "QUE_HACER": "Plan de acción urgente:\n\n1. Consulte con un profesional de salud mental inmediatamente\n2. Solicite licencia médica para recuperación\n3. Implemente rutina diaria estricta de autocuidado\n4. Elimine consumo de sustancias estimulantes\n5. Participe en terapia grupal o individual especializada\n6. Desarrolle un plan de acción con recursos de emergencia\n\nRecursos de apoyo inmediato:\n\n- Línea de crisis psicológica: 0800-222-6464\n- Servicio de telemedicina psicológica\n- Grupos de apoyo para estrés laboral\n\nMedidas organizacionales críticas:\n\n- Revisión completa de condiciones laborales\n- Adaptación de funciones temporal/permanente\n- Evaluación de posibles riesgos psicosociales"
-        }
+    "S2": {
+      "id": "S2",
+      "pregunta": "¿Con qué frecuencia ha tenido dolores de cabeza o migrañas?",
+      "opciones": {
+        "A": "Nunca o casi nunca",
+        "B": "Algunas veces",
+        "C": "Frecuentemente",
+        "D": "Casi todos los días"
+      }
+    },
+    "S3": {
+      "id": "S3",
+      "pregunta": "¿Se siente irritable o tiene arrebatos de ira con frecuencia?"
+    },
+    "S4": {
+      "id": "S4",
+      "pregunta": "¿Experimenta tensión muscular en cuello, hombros o espalda?",
+      "opciones": {
+        "A": "Raramente",
+        "B": "Ocasionalmente",
+        "C": "Frecuentemente",
+        "D": "Constantemente"
+      }
+    },
+    "S5": {
+      "id": "S5",
+      "pregunta": "¿Siente que no puede desconectar del trabajo fuera del horario laboral?",
+      "explicacion": "La incapacidad para desconectar es un signo clave de estrés laboral"
+    },
+    "S6": {
+      "id": "S6",
+      "pregunta": "¿Con qué frecuencia siente que no puede cumplir con todas sus tareas?",
+      "opciones": {
+        "A": "Nunca",
+        "B": "Raramente",
+        "C": "Frecuentemente",
+        "D": "Siempre"
+      }
+    },
+    "S7": {
+      "id": "S7",
+      "pregunta": "¿Con qué frecuencia tiene pensamientos negativos sobre su trabajo?",
+      "opciones": {
+        "A": "Nunca",
+        "B": "Ocasionalmente",
+        "C": "Frecuentemente",
+        "D": "Constantemente"
+      }
+    },
+    "S8": {
+      "id": "S8",
+      "pregunta": "¿Ha aumentado su consumo de cafeína, tabaco o alcohol recientemente?",
+      "explicacion": "El aumento de sustancias puede ser un mecanismo de afrontamiento"
+    },
+    "S9": {
+      "id": "S9",
+      "pregunta": "¿Experimenta dificultades para concentrarse en sus tareas?",
+      "opciones": {
+        "A": "Nunca",
+        "B": "Raramente",
+        "C": "Frecuentemente",
+        "D": "Siempre"
+      }
+    },
+    "S10": {
+      "id": "S10",
+      "pregunta": "¿Siente que no tiene control sobre su carga de trabajo?",
+      "explicacion": "La falta de control es un factor de riesgo para estrés laboral"
+    },
+    "S11": {
+      "id": "S11",
+      "pregunta": "¿Con qué frecuencia se siente agotado al final del día?",
+      "opciones": {
+        "A": "Raramente",
+        "B": "Algunos días",
+        "C": "La mayoría de los días",
+        "D": "Todos los días"
+      }
+    },
+    "S12": {
+      "id": "S12",
+      "pregunta": "¿Ha considerado dejar su trabajo debido al estrés?",
+      "explicacion": "La intención de renunciar es una señal de alerta"
     }
+  },
+  "reglas": [
+    {
+      "condiciones": ["S1", "S2-D", "S3"],
+      "diagnostico": "AS"
+    },
+    {
+      "condiciones": ["S4-D", "S5", "S10"],
+      "diagnostico": "AS"
+    },
+    {
+      "condiciones": ["S2-C", "S3", "S6-C"],
+      "diagnostico": "AM"
+    },
+    {
+      "condiciones": ["S5", "S8", "S10"],
+      "diagnostico": "AM"
+    },
+    {
+      "condiciones": ["S2-B", "S6-B", "S7-B"],
+      "diagnostico": "AL"
+    },
+    {
+      "condiciones": ["S9-C", "S11-C", "S10"],
+      "diagnostico": "AL"
+    },
+    {
+      "condiciones": ["S2-A", "S6-A", "S7-A"],
+      "diagnostico": "CA"
+    },
+    {
+      "condiciones": ["S6-D", "S7-D", "S12"],
+      "diagnostico": "AS"
+    },
+    {
+      "condiciones": ["S4-B", "S5", "S7-B"],
+      "diagnostico": "AL"
+    },
+    {
+      "condiciones": ["S8", "S10", "S11-D"],
+      "diagnostico": "AM"
+    }
+  ],
+  "diagnosticos": {
+    "CA": {
+      "DIAGNOSTICO": "🟢 Estrés bajo - Control adecuado",
+      "RIESGO": "Leve",
+      "RECOMENDACION": "Mantener hábitos saludables",
+      "QUE_HACER": "Continúe con sus rutinas de autocuidado:\n\n- Duerma 7-8 horas diarias\n- Realice actividad física regular\n- Mantenga una alimentación balanceada\n- Practique técnicas de relajación 10 minutos al día\n\nSugerencias adicionales:\n\n- Establezca límites claros entre trabajo y vida personal\n- Tome descansos regulares durante la jornada laboral\n- Fomente relaciones positivas en el entorno laboral"
+    },
+    "AL": {
+      "DIAGNOSTICO": "🟡 Estrés moderado - Atención necesaria",
+      "RIESGO": "Moderado",
+      "RECOMENDACION": "Implementar estrategias de manejo de estrés",
+      "QUE_HACER": "Plan de acción recomendado:\n\n1. Identifique fuentes específicas de estrés\n2. Establezca prioridades claras en sus tareas\n3. Practique técnicas de respiración profunda 3 veces al día\n4. Implemente la técnica Pomodoro (25 min trabajo/5 min descanso)\n5. Realice ejercicio aeróbico mínimo 30 minutos 3 veces/semana\n6. Limite el consumo de cafeína a 2 tazas diarias\n7. Consulte con un especialista si los síntomas persisten después de 2 semanas"
+    },
+    "AM": {
+      "DIAGNOSTICO": "🟠 Estrés alto - Intervención recomendada",
+      "RIESGO": "Alto",
+      "RECOMENDACION": "Tomar medidas preventivas inmediatas",
+      "QUE_HACER": "Acciones prioritarias:\n\n- Programe una evaluación médica completa\n- Inicie sesiones de terapia cognitivo-conductual\n- Implemente un plan de gestión del tiempo estricto\n- Realice ejercicios de mindfulness 15 minutos diarios\n- Establezca horarios fijos para desconexión digital\n- Priorice 7-8 horas de sueño de calidad\n- Considere apoyo farmacológico si lo recomienda un profesional\n\nMedidas organizacionales:\n\n- Solicite ajustes razonables en su carga laboral\n- Explore opciones de trabajo flexible\n- Participe en programas de bienestar laboral"
+    },
+    "AS": {
+      "DIAGNOSTICO": "🔴 Estrés severo - Atención inmediata requerida",
+      "RIESGO": "Muy alto",
+      "RECOMENDACION": "Buscar apoyo profesional urgente",
+      "QUE_HACER": "Plan de acción urgente:\n\n1. Consulte con un profesional de salud mental inmediatamente\n2. Solicite licencia médica para recuperación\n3. Implemente rutina diaria estricta de autocuidado\n4. Elimine consumo de sustancias estimulantes\n5. Participe en terapia grupal o individual especializada\n6. Desarrolle un plan de acción con recursos de emergencia\n\nRecursos de apoyo inmediato:\n\n- Línea de crisis psicológica: 0800-222-6464\n- Servicio de telemedicina psicológica\n- Grupos de apoyo para estrés laboral\n\nMedidas organizacionales críticas:\n\n- Revisión completa de condiciones laborales\n- Adaptación de funciones temporal/permanente\n- Evaluación de posibles riesgos psicosociales"
+    }
+  }
 }
