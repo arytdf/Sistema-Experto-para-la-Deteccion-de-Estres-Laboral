@@ -116,7 +116,7 @@ if st.session_state.pagina == "inicio":
         unsafe_allow_html=True
     )
     
-    # Caja de bienvenida con texto similar a la imagen
+    # Caja de bienvenida con texto 
     st.markdown(
         """
         <div style="
