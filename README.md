@@ -133,7 +133,7 @@ Distribuido bajo licencia **MIT**. Consultar el archivo `LICENSE` para más info
 
 **Ariel Martín Altamirano**  
 Desarrollo de Sistemas de IA – 2025  
-Politecnico Malvinas Argentinas - Rio Grande - Tierra del Fuego
+Politécnico Malvinas Argentinas - Rio Grande - Tierra del Fuego
 
 
 
