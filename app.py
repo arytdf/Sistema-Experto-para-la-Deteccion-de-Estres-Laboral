@@ -1,167 +1,229 @@
-# app.py
 import streamlit as st
-import json
-from pathlib import Path
-from functools import partial
-from io import BytesIO
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
+from core.carga_base import CargaBase
+from core.motor import MotorInferencia
+from servicios.generador_reporte import generar_pdf
+import datetime
 
-# ───── Configuración inicial ──────────────────────────────────
+# Configuración de página
 st.set_page_config(
-    page_title="Test de Estrés Laboral",
+    page_title="Sistema Experto - Estrés Laboral",
     page_icon="💼",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-BASE = Path(__file__).parent
 
-# ───── Carga de estilos ───────────────────────────────────────
-with open(BASE / "styles.css", encoding="utf-8") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# Cargar estilos CSS
+def cargar_estilos():
+    try:
+        with open("estilos.css", "r", encoding="utf-8") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.warning("No se encontró el archivo de estilos CSS")
 
-# ───── Carga de datos ───────────────────────────────
-with open(BASE / "data/reglas.json", encoding="utf-8") as f:
-    reglas_data = json.load(f)
-    # Crear diccionario de reglas
-    REGLAS = {}
-    for item in reglas_data.get('entries', []):
-        REGLAS[item['name']] = item['props']
+cargar_estilos()
 
-with open(BASE / "data/diagnosticos.json", encoding="utf-8") as f:
-    diag_data = json.load(f)
-    # Crear diccionario de diagnósticos
-    DIAG = {}
-    for item in diag_data.get('entries', []):
-        # Unir lista QUE_HACER con saltos de línea
-        if 'QUE_HACER' in item['props'] and isinstance(item['props']['QUE_HACER'], list):
-            item['props']['QUE_HACER'] = "\n".join(item['props']['QUE_HACER'])
-        DIAG[item['name']] = item['props']
+# Estado de la sesión
+ESTADO_INICIAL = {
+    "pagina": "inicio",
+    "motor": None,
+    "respuestas": [],
+    "sintoma_actual": None,
+    "progreso": 0
+}
 
-# Asegurar que los nodos de diagnóstico estén en REGLAS
-for key in DIAG.keys():
-    if key not in REGLAS:
-        REGLAS[key] = DIAG[key]
+if 'pagina' not in st.session_state:
+    st.session_state.update(ESTADO_INICIAL)
 
-# ───── Estado de sesión ────────────────────────────────────────
-DEFAULT_STATE = {"pagina": "inicio", "nodo_actual": "B", "historial": [], "respuestas": []}
-for key, val in DEFAULT_STATE.items():
-    st.session_state.setdefault(key, val)
+# Funciones de navegación
+def comenzar_evaluacion():
+    try:
+        base = CargaBase("data/base.json")
+        st.session_state.pagina = "preguntas"
+        st.session_state.motor = MotorInferencia(base.datos)
+        st.session_state.sintoma_actual = None
+        st.session_state.respuestas = []
+        st.session_state.progreso = 0
+    except Exception as e:
+        st.error(f"Error al iniciar la evaluación: {str(e)}")
+        st.session_state.pagina = "inicio"
 
-# ───── Funciones ───────────────────────────────────────────────
-def comenzar_test():
-    st.session_state.pagina = "preguntas"
+def manejar_respuesta(respuesta):
+    try:
+        motor = st.session_state.motor
+        sintoma = st.session_state.sintoma_actual
+        
+        if not sintoma:
+            st.session_state.pagina = "diagnostico"
+            return
+            
+        if isinstance(respuesta, bool):
+            hecho = sintoma["id"] if respuesta else f"!{sintoma['id']}"
+            respuesta_str = "Sí" if respuesta else "No"
+        else:
+            hecho = f"{sintoma['id']}:{respuesta}"
+            respuesta_str = sintoma["opciones"][respuesta]
+        
+        st.session_state.respuestas.append((sintoma["pregunta"], respuesta_str))
+        st.session_state.progreso = min(100, st.session_state.progreso + (100 // len(motor.sintomas)))
+        motor.agregar_hecho(hecho)
+        st.session_state.sintoma_actual = motor.obtener_proximo_sintoma()
+        
+        if motor.diagnostico_actual is not None or st.session_state.sintoma_actual is None:
+            st.session_state.pagina = "diagnostico"
+    except Exception as e:
+        st.error(f"Error al procesar respuesta: {str(e)}")
+        st.session_state.pagina = "inicio"
 
-def retroceder():
-    st.session_state.nodo_actual = st.session_state.historial.pop()
+def reiniciar_evaluacion():
+    st.session_state.update(ESTADO_INICIAL)
 
-def avanzar(resp: str):
-    nodo = REGLAS[st.session_state.nodo_actual]
-    st.session_state.respuestas.append((nodo["PREGUNTA"], resp))
-    st.session_state.historial.append(st.session_state.nodo_actual)
-    st.session_state.nodo_actual = nodo["RESPUESTAS"][resp]
-
-def reiniciar_test():
-    st.session_state.update(DEFAULT_STATE)
-
-def finalizar_test():
+def finalizar_evaluacion():
     st.session_state.pagina = "despedida"
 
-def generar_pdf() -> bytes:
-    buffer = BytesIO()
-    pdf = canvas.Canvas(buffer, pagesize=A4)
-    w, h = A4
-    x, y = 40, h - 40
+# Interfaz de usuario
+if st.session_state.pagina == "inicio":
+    st.markdown('<div class="header-test"><h1>Evaluación de Estrés Laboral</h1></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="welcome-box">
+        <p>Este sistema experto evalúa tu nivel de estrés laboral utilizando criterios validados científicamente por:</p>
+        <ul>
+            <li>Organización Mundial de la Salud (OMS)</li>
+            <li>Asociación Americana de Psicología (APA)</li>
+            <li>Modelos de evaluación de estrés laboral</li>
+        </ul>
+        <p>Al finalizar, recibirás un diagnóstico personalizado con recomendaciones basadas en evidencia.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.button("COMENZAR EVALUACIÓN", on_click=comenzar_evaluacion, use_container_width=True)
 
-    pdf.setTitle("Informe – Test de Estrés Laboral")
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(x, y, "Informe – Test de Estrés Laboral")
-    y -= 32
-
-    diag = DIAG[st.session_state.nodo_actual]
-    pdf.setFont("Helvetica", 12)
-    pdf.drawString(x, y, f"Diagnóstico final: {diag['DIAGNOSTICO']}")
-    y -= 26
-
-    pdf.drawString(x, y, "Respuestas:")
-    y -= 20
-    pdf.setFont("Helvetica", 11)
-    for i, (preg, resp) in enumerate(st.session_state.respuestas, 1):
-        pdf.drawString(x + 10, y, f"{i}. {preg} → {resp}")
-        y -= 14
-        if y < 60:
-            pdf.showPage()
-            y = h - 40
-            pdf.setFont("Helvetica", 11)
-
-    pdf.save()
-    buffer.seek(0)
-    return buffer.getvalue()
-
-# ───── Interfaz ────────────────────────────────────────────────
-pagina = st.session_state.pagina
-
-# 1) Pantalla de bienvenida
-if pagina == "inicio":
-    st.markdown('<div class="header-test"><h1>¡Bienvenido/a!</h1></div>', unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div class="welcome-box">
-          <p>
-            Bienvenido/a al Test de Estrés Laboral. A través de preguntas breves,
-            identificarás tu nivel de estrés laboral, sus posibles causas y obtendrás recomendaciones.
-            Presiona <strong>COMENZAR TEST</strong> y responde SÍ o NO.
-          </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    cols = st.columns([1, 4, 1], gap="small")
-    cols[1].button("COMENZAR TEST", key="btn_comenzar", use_container_width=True, on_click=comenzar_test)
-
-# 2) Preguntas
-elif pagina == "preguntas":
-    st.markdown('<div class="header-test"><h1>TEST DE ESTRÉS LABORAL</h1></div>', unsafe_allow_html=True)
-    nodo = REGLAS[st.session_state.nodo_actual]
-    if "PREGUNTA" in nodo:
-        st.markdown(f'<div class="box-pregunta"><strong>{nodo["PREGUNTA"]}</strong></div>', unsafe_allow_html=True)
-        if st.session_state.historial:
-            cols = st.columns([1, 3, 3, 3, 1], gap="small")
-            cols[1].button("ANTERIOR", key="btn_ant", use_container_width=True, on_click=retroceder)
-            cols[2].button("SÍ", key="btn_si", use_container_width=True, on_click=partial(avanzar, "SI"))
-            cols[3].button("NO", key="btn_no", use_container_width=True, on_click=partial(avanzar, "NO"))
+elif st.session_state.pagina == "preguntas":
+    st.markdown('<div class="header-test"><h1>Evaluación de Estrés Laboral</h1></div>', unsafe_allow_html=True)
+    
+    if st.session_state.motor is None:
+        base = CargaBase("data/base.json")
+        st.session_state.motor = MotorInferencia(base.datos)
+    
+    if st.session_state.sintoma_actual is None:
+        st.session_state.sintoma_actual = st.session_state.motor.obtener_proximo_sintoma()
+    
+    sintoma = st.session_state.sintoma_actual
+    
+    if sintoma:
+        st.progress(st.session_state.progreso / 100)
+        st.caption(f"Progreso: {st.session_state.progreso}%")
+        
+        st.markdown(f'<div class="question-box"><strong>{sintoma["pregunta"]}</strong></div>', unsafe_allow_html=True)
+        
+        if "explicacion" in sintoma:
+            with st.expander("ℹ️ Más información", expanded=False):
+                st.info(sintoma["explicacion"])
+        
+        if "opciones" in sintoma:
+            opciones = list(sintoma["opciones"].items())
+            cols = st.columns(len(opciones))
+            for i, (key, value) in enumerate(opciones):
+                cols[i].button(value, on_click=manejar_respuesta, args=(key,), use_container_width=True)
         else:
-            _, c_si, c_no, _ = st.columns([1, 4, 4, 1], gap="small")
-            c_si.button("SÍ", key="btn_si0", use_container_width=True, on_click=partial(avanzar, "SI"))
-            c_no.button("NO", key="btn_no0", use_container_width=True, on_click=partial(avanzar, "NO"))
+            cols = st.columns([1, 1, 1])
+            cols[0].button("SÍ", on_click=manejar_respuesta, args=(True,), use_container_width=True)
+            cols[2].button("NO", on_click=manejar_respuesta, args=(False,), use_container_width=True)
     else:
         st.session_state.pagina = "diagnostico"
         st.rerun()
 
-# 3) Diagnóstico
-elif pagina == "diagnostico":
-    st.markdown('<div class="header-test"><h1>TEST DE ESTRÉS LABORAL</h1></div>', unsafe_allow_html=True)
-    diag = DIAG[st.session_state.nodo_actual]
-    que_html = diag["QUE_HACER"].replace("\n", "<br/>")
+elif st.session_state.pagina == "diagnostico":
+    st.markdown('<div class="header-test"><h1>Resultado de la Evaluación</h1></div>', unsafe_allow_html=True)
+    
+    motor = st.session_state.motor
+    
+    if motor is None or not hasattr(motor, 'diagnosticos'):
+        st.error("Error: No se pudo cargar la información de diagnóstico")
+        st.button("Volver al inicio", on_click=reiniciar_evaluacion)
+        st.stop()
+    
+    clave_diag = motor.diagnostico_actual or "CA"
+    diagnostico = motor.diagnosticos.get(clave_diag, motor.diagnosticos.get("CA", {}))
+    
+    # Asignar clase CSS según severidad
+    clase_severidad = ""
+    if "🔴" in diagnostico.get("DIAGNOSTICO", ""):
+        clase_severidad = "high-severity"
+    elif "🟠" in diagnostico.get("DIAGNOSTICO", ""):
+        clase_severidad = "medium-high-severity"
+    elif "🟡" in diagnostico.get("DIAGNOSTICO", ""):
+        clase_severidad = "medium-severity"
+    elif "🟢" in diagnostico.get("DIAGNOSTICO", ""):
+        clase_severidad = "low-severity"
+    
     st.markdown(
         f"""
-        <div class="diag-box">
-          <h3>{diag['DIAGNOSTICO']}</h3>
-          <p>{diag['RECOMENDACION']}</p>
-          <h5>¿Qué hacer?</h5>
-          <p>{que_html}</p>
+        <div class="diagnosis-box {clase_severidad}">
+            <h3>{diagnostico.get('DIAGNOSTICO', 'Diagnóstico no disponible')}</h3>
+            <p><strong>Nivel de riesgo:</strong> {diagnostico.get('RIESGO', 'No especificado')}</p>
+            <p><strong>Recomendación principal:</strong> {diagnostico.get('RECOMENDACION', '')}</p>
         </div>
         """,
         unsafe_allow_html=True
     )
-    cols = st.columns([1, 4, 4, 1], gap="small")
-    cols[1].button("REINICIAR", key="btn_rein", use_container_width=True, on_click=reiniciar_test)
-    cols[2].button("FINALIZAR", key="btn_fin", use_container_width=True, on_click=finalizar_test)
+    
+    with st.expander("🔍 Plan de acción detallado", expanded=True):
+        plan_accion = diagnostico.get('QUE_HACER', 'Plan de acción no disponible').replace('\n', '<br/>')
+        st.markdown(
+            f"""
+            <div class="action-plan">
+                <p>{plan_accion}</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    st.markdown("---")
+    st.subheader("Recursos de apoyo")
+    st.markdown("""
+    - **Línea de ayuda psicológica:** 0800-222-6464 (Argentina)
+    - **Guía OMS para manejo de estrés:** [Descargar PDF](https://www.who.int/docs)
+    - **Ejercicios de respiración guiada:** [Video tutorial](https://youtu.be/ejxw-hJf4Fw)
+    """)
+    
+    col1, col2 = st.columns(2)
+    col1.button("REINICIAR EVALUACIÓN", on_click=reiniciar_evaluacion, use_container_width=True)
+    col2.button("DESCARGAR INFORME", on_click=finalizar_evaluacion, use_container_width=True)
 
-# 4) Despedida
-else:
-    st.markdown('<div class="header-test"><h1>¡Gracias por realizar el test!</h1></div>', unsafe_allow_html=True)
-    st.success("Podés descargar tu informe en PDF o volver a comenzar cuando quieras.")
-    cols = st.columns([1, 4, 4, 1], gap="small")
-    cols[1].download_button("DESCARGAR INFORME EN PDF", data=generar_pdf(), file_name="informe_estres_laboral.pdf", mime="application/pdf", key="btn_pdf", use_container_width=True)
-    cols[2].button("REALIZAR NUEVAMENTE", key="btn_new", use_container_width=True, on_click=reiniciar_test)
+elif st.session_state.pagina == "despedida":
+    st.markdown('<div class="header-test"><h1>¡Gracias por completar la evaluación!</h1></div>', unsafe_allow_html=True)
+    st.success("""
+    Tu informe detallado está listo para descargar. Contiene:
+    
+    - Diagnóstico completo
+    - Análisis de tus respuestas
+    - Plan de acción personalizado
+    - Recursos científicos de apoyo
+    """)
+    
+    # Generar PDF
+    try:
+        motor = st.session_state.motor
+        clave_diag = motor.diagnostico_actual or "CA"
+        
+        pdf_file = generar_pdf(
+            st.session_state.respuestas,
+            clave_diag,
+            motor.diagnosticos
+        )
+        
+        st.download_button(
+            "⬇️ DESCARGAR INFORME COMPLETO EN PDF",
+            data=pdf_file,
+            file_name=f"informe_estres_laboral_{datetime.datetime.now().strftime('%Y%m%d')}.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+    except Exception as e:
+        st.error(f"Error al generar el informe: {str(e)}")
+    
+    st.button("REALIZAR NUEVA EVALUACIÓN", on_click=reiniciar_evaluacion, use_container_width=True)
+
+# Pie de página
+st.markdown("---")
+st.caption("Sistema Experto para Evaluación de Estrés Laboral - © 2023")

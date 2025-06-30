@@ -1,0 +1,118 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Encabezados */
+h1, h2, h3, h4 {
+    color: #2c3e50;
+}
+
+/* Contenedor principal */
+.stApp {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cajas de contenido */
+.welcome-box, .question-box, .diagnosis-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.welcome-box:hover, .question-box:hover, .diagnosis-box:hover {
+    transform: translateY(-5px);
+}
+
+/* Clases de severidad */
+.high-severity {
+    border-left: 8px solid #e74c3c;
+    background-color: #fff5f5;
+}
+
+.medium-high-severity {
+    border-left: 8px solid #f39c12;
+    background-color: #fffaf0;
+}
+
+.medium-severity {
+    border-left: 8px solid #f1c40f;
+    background-color: #fffde7;
+}
+
+.low-severity {
+    border-left: 8px solid #2ecc71;
+    background-color: #f8fff5;
+}
+
+/* Botones principales */
+.stButton>button {
+    background-color: #4CAF50 !important; /* Color verde */
+    color: white !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    margin: 4px 2px !important;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Hover para botones */
+.stButton>button:hover {
+    background-color: #45a049 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* Botones de opciones */
+div[data-testid="column"] button {
+    background-color: #2196F3 !important; /* Color azul */
+    margin: 5px !important;
+    padding: 10px 15px !important;
+}
+
+/* Asegurar visibilidad del texto */
+.stButton>button>div>p {
+    color: white !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+}
+
+/* Barra de progreso */
+.stProgress>div>div>div {
+    background-color: #3498db !important;
+}
+
+/* Expander */
+.stExpander {
+    border-radius: 8px !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Mensajes informativos */
+.stAlert {
+    border-radius: 8px !important;
+}
