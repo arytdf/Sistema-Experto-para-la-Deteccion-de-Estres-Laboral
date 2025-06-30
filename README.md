@@ -45,32 +45,30 @@ Desarrollado como proyecto académico para el *Politécnico Malvinas Argentinas*
 ```text
 /Sistema-Experto-para-la-Deteccion-de-Estres-Laboral/
 │
-├── app.py                # Lógica principal de la app Streamlit
-├── styles.css            # Estilos personalizados
-├── requirements.txt      # Dependencias Python
-├── sistema_experto.bat   # Script Windows para setup y ejecución
-├── .gitignore            # Exclusiones de Git
-├── data/                 # Datos y recursos
-│   ├── convert_yml_to_json.bat  # Conversor YAML → JSON (Windows)
-│   ├── reglas.yml        # Árbol de reglas (editable)
-│   ├── generate_json.py  # Script de conversión YAML → JSON
-│   ├── reglas.json       # Reglas en JSON para la app
-│   └── diagnosticos.json # Mensajes de diagnóstico
-└── documentos/           # Documentación adicional
-    ├── Descripción detallada del proyecto.pdf
-    ├── Diagrama SE con identificación de nodos.png
-    └── Representación y Organización del conocimiento.pdf
+├── app.py                 # Aplicación principal Streamlit
+├── estilos.css            # Estilos personalizados
+├── requirements.txt       # Dependencias
+├── sistema_experto.bat    # Script automatizado (setup y ejecución)
+├── /core/
+│   ├── motor.py           # Motor de inferencia (forward chaining)
+│   ├── carga_base.py      # Lectura de base de conocimiento
+├── /servicios/
+│   └── generador_reporte.py # Generación de informe PDF
+├── /data/
+│   └── base.json          # Conjunto de síntomas, reglas y diagnósticos
+└── /documentos/
+    └── Representacion_Conocimiento_Adaptado.docx
 ```
-
 ---
 
-## 🗂️ Base de Conocimiento
+## 🌟 Características Principales
 
-El sistema se basa en reglas *if‑then* fundamentadas en:
-
-- **Modelo de Karasek** (carga laboral vs. control).  
-- **Inventario de Burnout de Maslach**.  
-- **Guías de la OMS** para manejo del estrés.  
+- El sistema se basa en reglas *if‑then* 
+- Flujo de preguntas tipo árbol de decisión (Sí/No y opciones múltiples).
+- Diagnóstico automático por niveles de riesgo (🔴, 🟠, 🟡, 🟢).
+- Motor de inferencia con encadenamiento hacia adelante.
+- Informe personalizado en PDF.
+- Interfaz intuitiva y adaptable a dispositivos móviles.
 - Criterios clínicos validados por la **Psic. Micaela Barria**.  
 
 ### Clasificación de Riesgo
@@ -86,7 +84,7 @@ El sistema se basa en reglas *if‑then* fundamentadas en:
 
 ## 🚀 Instalación y Ejecución
 
-### Prerrequisitos
+### Prerequisitos
 - **Python 3.10** o superior  
 - **Git** (opcional)  
 
@@ -106,10 +104,7 @@ source venv/bin/activate
 # 3. Instalar dependencias
 pip install -r requirements.txt
 
-# 4. (Opcional) Convertir reglas YAML → JSON si modificaste reglas.yml
-python -c "import yaml, json; data = yaml.safe_load(open('data/reglas.yml')); open('data/reglas.json','w').write(json.dumps(data, indent=2))"
-
-# 5. Ejecutar aplicación
+# 4. Ejecutar aplicación
 streamlit run app.py
 ```
 
@@ -128,7 +123,7 @@ La aplicación está disponible 24/7 en:
 Flujo principal del usuario:
 
 1. **Pantalla inicial** – explicación del test y consentimiento informado.  
-2. **Cuestionario adaptativo** – 10‑15 preguntas SÍ/NO con navegación bidireccional.  
+2. **Cuestionario adaptativo** – 10‑12 preguntas (Sí/No y opciones múltiples).  
 3. **Diagnóstico personalizado** – nivel de riesgo y explicación.  
 4. **Generación de PDF** – informe completo con recomendaciones.  
 5. **Pantalla final** – opción para reiniciar el test o compartir resultados.  
@@ -152,7 +147,7 @@ Flujo principal del usuario:
 
 ## 👩‍⚕️ Aporte Clínico
 
-El conocimiento experto validado por la **Psic. Micaela Barria** garantiza:
+El conocimiento experto validado por la **Psicologa Micaela Barria** garantiza:
 
 - Detección temprana de síntomas físicos y emocionales.  
 - Evaluación de factores laborales críticos (horas extra, autonomía, apoyo).  
