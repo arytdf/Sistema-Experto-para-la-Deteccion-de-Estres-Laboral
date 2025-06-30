@@ -1,37 +1,21 @@
-import os
 import sys
 import subprocess
+import os
 
-# Instalar dependencias faltantes si no están presentes
-required_packages = {'reportlab', 'PyPDF2', 'python-dotenv'}
+# Verificar e instalar dependencias faltantes solo en Streamlit Cloud
+if "streamlit" in sys.modules:
+    required = {"reportlab", "PyPDF2", "python-dotenv"}
+    try:
+        installed_output = subprocess.check_output([sys.executable, "-m", "pip", "freeze"]).decode()
+        installed = {pkg.split("==")[0] for pkg in installed_output.split("\n") if pkg}
+        missing = required - installed
 
-try:
-    import pkg_resources
-    installed = {pkg.key for pkg in pkg_resources.working_set}
-    missing = required_packages - installed
+        if missing:
+            print(f"Instalando paquetes faltantes: {', '.join(missing)}")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", *missing])
+    except Exception as e:
+        print(f"Error verificando dependencias: {str(e)}")
 
-    if missing:
-        print(f"Instalando paquetes faltantes: {', '.join(missing)}")
-        subprocess.check_call([
-            sys.executable, 
-            "-m", "pip", "install", 
-            "--no-cache-dir", 
-            "--disable-pip-version-check",
-            *missing
-        ])
-        # Reiniciar la aplicación después de instalar
-        os.execv(sys.executable, ['python'] + sys.argv)
-
-except ImportError:
-    # Fallback si pkg_resources no está disponible
-    subprocess.check_call([
-        sys.executable, 
-        "-m", "pip", "install", 
-        "--no-cache-dir", 
-        "--disable-pip-version-check",
-        *required_packages
-    ])
-    os.execv(sys.executable, ['python'] + sys.argv)
 import streamlit as st
 from core.carga_base import CargaBase
 from core.motor import MotorInferencia
