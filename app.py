@@ -1,8 +1,17 @@
 import streamlit as st
-from core.carga_base import CargaBase
-from core.motor import MotorInferencia
-from servicios.generador_reporte import generar_pdf
+try:
+    # Para ejecución local
+    from core.carga_base import CargaBase
+    from core.motor import MotorInferencia
+    from servicios.generador_reporte import generar_pdf
+except ImportError:
+    # Para despliegue en Streamlit Cloud
+    from .core.carga_base import CargaBase
+    from .core.motor import MotorInferencia
+    from .servicios.generador_reporte import generar_pdf
 import datetime
+
+
 
 # Configuración de página
 st.set_page_config(

@@ -1,0 +1,12 @@
+sistema_experto_estres/
+├── core/
+│   ├── __init__.py
+│   ├── inference_engine.py
+│   └── knowledge_loader.py
+├── data/
+│   └── knowledge_base.json
+├── services/
+│   └── report_generator.py
+├── app.py
+├── requirements.txt
+└── styles.css
