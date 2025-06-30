@@ -59,7 +59,7 @@ Desarrollado como proyecto académico para el *Politécnico Malvinas Argentinas*
 ├── /data/
 │   └── base.json          # Síntomas, reglas y diagnósticos
 └── /documentos/
-    └── Representacion_Conocimiento_Adaptado.docx
+    └── Representación y Organización del conocimiento.pdf
 ```
 
 ---
