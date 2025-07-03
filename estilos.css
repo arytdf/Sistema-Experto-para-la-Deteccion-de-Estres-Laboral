@@ -80,9 +80,9 @@ h1, h2, h3, h4 {
     box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
 }
 
-/* Botones de opciones */
+/* Botones de opciones (SI/NO, etc)*/
 div[data-testid="column"] button {
-    background-color: #4CAF50 !important;
+    background-color: #6394fc !important;
     margin: 5px !important;
     padding: 10px 15px !important;
     font-weight: bold !important;
@@ -144,6 +144,7 @@ footer {
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-size: 1.1rem;
+    text-align: center;
 }
 
 /* Plan de acción */

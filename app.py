@@ -116,7 +116,7 @@ if st.session_state.pagina == "inicio":
         unsafe_allow_html=True
     )
     
-    # Caja de bienvenida con texto similar a la imagen
+    # Caja de bienvenida 
     st.markdown(
         """
         <div style="
@@ -233,9 +233,10 @@ elif st.session_state.pagina == "diagnostico":
     st.markdown("---")
     st.subheader("Recursos de apoyo")
     st.markdown("""
-    - **Línea de ayuda psicológica:** 0800-222-6464 (Argentina)
-    - **Guía OMS para manejo de estrés:** [Descargar PDF](https://www.who.int/docs)
-    - **Ejercicios de respiración guiada:** [Video tutorial](https://youtu.be/ejxw-hJf4Fw)
+    - **Línea de ayuda psicológica:** 0800-999-0091 (Argentina). Funcionando las 24 horas los 365 días del año
+    - **Salud Mental:** 2964-422285 (Río Grande). Horario de atención de lunes a viernes de 8 a 17 hs.          
+    - **Guía OMS para manejo de estrés:** [Descargar PDF](https://www.who.int/docs/default-source/mental-health/sh-2020-spa-3-web.pdf)
+    - **Ejercicios de respiración guiada:** [Video tutorial](https://youtu.be/tYwnSBkc_To)
     """)
     
     col1, col2 = st.columns(2)
